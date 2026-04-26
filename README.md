@@ -46,6 +46,7 @@ In the tables below, the following placeholders are used:
 | Layer | Script Label Pattern | Description |
 |-------|----------------------|-------------|
 | **auto_common** | `template:header` | Main header group/frame to be copied once per page. |
+| | `template:header:month` | Combined text frame for the month header (contains English month, year, and Greek month). Uses a single paragraph style. |
 | | `template:grid` | Master grid frame to be copied once per page. |
 | | `template:*` | Any item with a `template:` prefix in this layer is automatically copied. |
 | **auto_base** | `template:cell:{cell type}:base:standard` | Base frame for standard date boxes. |
@@ -77,6 +78,17 @@ The plugin automatically applies the following paragraph styles based on the cel
 | `auto:text:{cell type}:{lang}:note` | Extra notes in specified language. |
 | `auto:text:{cell type}:note` | Generic note text. |
 | `auto:text:{cell type}:readings` | Style for scripture readings. |
+| `auto:text:header:month` | Paragraph style for the combined month header textbox. |
+
+### Character Styles
+
+The following character styles are applied to substrings within the combined header textbox:
+
+| Style Pattern | Purpose |
+|---------------|---------|
+| `auto:char:header:eng:month` | Character style for the English month name. |
+| `auto:char:header:gr:month` | Character style for the Greek month name. |
+| `auto:char:header:year` | Character style for the year. |
 
 ## 🏁 Getting Started
 

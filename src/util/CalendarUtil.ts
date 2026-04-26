@@ -131,12 +131,17 @@ export class CalendarUtils {
 
             console.log(`Processing month ${month + 1} of year ${year}`);
 
+            // PROCESS HEADER PAGE
+
             // duplicate common header items
             for (const item of commonHeaderItems) {
                 if (item.itemLayer.name === 'auto_common') {
                     this.duplicateToMonthPage(item, month, false);
                 }
             }
+            this.processHeaderMonth(monthData, month, year);
+
+            // PROCESS GRID PAGE
 
             // duplicate common grid items
             for (const item of commonGridItems) {
@@ -188,6 +193,62 @@ export class CalendarUtils {
 
 
     /* PRIVATE HELPERS */
+
+    private processHeaderMonth(monthData: any, monthIndex: number, year: string) {
+        // Use a single combined header textbox and apply paragraph and character styles
+        const monthNameEng = monthData.name[0] || "-";
+        const monthNameGr = monthData.name[1] || "-";
+        const paddedYear = ` ${year} `; // add spaces for better character styling
+        const headerText = `${monthNameEng}${paddedYear}${monthNameGr}`;
+        const headerLabel = "template:header:month";
+        if (this.labelMap.has(headerLabel)) {
+            const headerFrame = this.duplicateToMonthPage(this.labelMap.get(headerLabel), monthIndex, false);
+            if (headerFrame) {
+                headerFrame.contents = headerText;
+                try {
+                    headerFrame.characters
+                        .everyItem()
+                        .getElements()
+                        .forEach((character: any, index: number) => {
+                            character.appliedCharacterStyle =
+                                this.doc.characterStyles.itemByName("[None]");
+                        });
+
+                    // Apply the paragraph style to the whole story
+                    headerFrame.paragraphs
+                        .everyItem()
+                        .getElements()
+                        .forEach((paragraph: any, index: number) => {
+                            paragraph.appliedParagraphStyle =
+                                this.doc.paragraphStyles.itemByName("auto:text:header:month");
+                        });
+
+                    // English month (character style)
+                    const engStart = 0;
+                    const engEnd = engStart + monthNameEng.length;
+                    headerFrame.characters
+                        .itemByRange(engStart, engEnd - 1)
+                        .appliedCharacterStyle = this.doc.characterStyles.itemByName("auto:char:header:eng:month");
+
+                    // Year (character style)
+                    const yearStart = monthNameEng.length;
+                    const yearEnd = yearStart + paddedYear.length;
+                    headerFrame.characters
+                        .itemByRange(yearStart, yearEnd - 1)
+                        .appliedCharacterStyle = this.doc.characterStyles.itemByName("auto:char:header:year");
+
+                    // Greek month (character style)
+                    const grStart = yearEnd;
+                    const grEnd = grStart + monthNameGr.length;
+                    headerFrame.characters
+                        .itemByRange(grStart, grEnd - 1)
+                        .appliedCharacterStyle = this.doc.characterStyles.itemByName("auto:char:header:gr:month");
+                } catch (e) {
+                    console.log("Warning: Could not apply header paragraph/character styles");
+                }
+            }
+        }
+    }
 
     private getGridGeometricBounds() {
         if (this._gridBoundsCache !== null) {
