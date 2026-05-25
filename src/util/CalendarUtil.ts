@@ -602,17 +602,16 @@ export class CalendarUtils {
         if (baseLabel && this.labelMap.has(baseLabel)) {
             const base = this.duplicateToDateBox(this.labelMap.get(baseLabel), month, row, col, isHalfCell);
             if (base) {
-                const isFeast = dateData.mainText && dateData.mainText.feast;
-                const newDateStyle = `auto:text:${cellType}:new:${isFeast ? "feast" : "standard"}`;
-                const oldDateStyle = `auto:text:${cellType}:old:${isFeast ? "feast" : "standard"}`;
+                const newDateStyle = `auto:text:${cellType}:new:${dateData.isFeast ? "feast" : "standard"}`;
+                const oldDateStyle = `auto:text:${cellType}:old:${dateData.isSecondaryFeast ? "feast" : "standard"}`;
                 const noteStyle = `auto:text:${cellType}:note`;
 
                 base.contents = "";
                 const styleSections: string[] = [];
-                base.contents = dateData.newDate.toString();
+                base.contents = dateData.date.toString();
                 styleSections.push(newDateStyle);
 
-                base.contents += "\r" + dateData.oldDate.toString();
+                base.contents += "\r" + dateData.secondaryDate.toString();
                 styleSections.push(oldDateStyle);
 
                 if (dateData.note) {

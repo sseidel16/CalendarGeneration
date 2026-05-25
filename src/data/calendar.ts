@@ -47,11 +47,13 @@ export type SplitBox = {
 
 export type DateBox = {
     type: 'DATE';
-    newDate: number; // new calendar date
-    oldDate: number; // old calendar date
+    date: number; // primary calendar date number
+    secondaryDate: number; // secondary calendar date number
     background: 'STANDARD' | 'FASTING'; // any fasting rule beyond no meat
     moon: 'NONE' | 'NEW' | 'FIRST' | 'FULL' | 'LAST'; // the moon phase
     fasting: 'NONE' | 'DAIRY' | 'FISH' | 'OIL' | 'STRICT';
+    isFeast: boolean; // primary calendar has a feast — date should be highlighted
+    isSecondaryFeast: boolean; // both calendars have feasts — secondaryDate should be highlighted
     note?: string; // note indicator like *, links to a NoteBox in the same month
     mainText: {
         feast?: string[]; // [english, greek]
@@ -64,8 +66,8 @@ export type DateBox = {
     };
 };
 
-import data2024 from './2024.json';
 import data2025 from './2025.json';
 import data2026 from './2026.json';
+import data2027 from './2027.json';
 
-export const calendarData: CalendarData = data2024 as CalendarData;
+export const calendarData: CalendarData = data2026 as CalendarData;
