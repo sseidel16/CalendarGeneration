@@ -4445,7 +4445,7 @@
             "secondaryDate": 15,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -7788,7 +7788,7 @@
             "secondaryDate": 2,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -7949,7 +7949,7 @@
             "secondaryDate": 9,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8110,7 +8110,7 @@
             "secondaryDate": 16,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8469,7 +8469,7 @@
             "secondaryDate": 30,
             "background": "FASTING",
             "moon": "FULL",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8630,7 +8630,7 @@
             "secondaryDate": 7,
             "background": "FASTING",
             "moon": "LAST",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {

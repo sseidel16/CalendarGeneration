@@ -3973,7 +3973,7 @@
             "secondaryDate": 26,
             "background": "FASTING",
             "moon": "LAST",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -4138,7 +4138,7 @@
             "secondaryDate": 2,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -4299,7 +4299,7 @@
             "secondaryDate": 9,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -7813,7 +7813,7 @@
             "secondaryDate": 3,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -7974,7 +7974,7 @@
             "secondaryDate": 10,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8332,7 +8332,7 @@
             "secondaryDate": 24,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8494,7 +8494,7 @@
             "secondaryDate": 1,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
@@ -8655,7 +8655,7 @@
             "secondaryDate": 8,
             "background": "FASTING",
             "moon": "NONE",
-            "fasting": "STRICT",
+            "fasting": "OIL",
             "isFeast": false,
             "isSecondaryFeast": false,
             "mainText": {
