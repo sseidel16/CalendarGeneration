@@ -70,4 +70,4 @@ import data2025 from './2025.json';
 import data2026 from './2026.json';
 import data2027 from './2027.json';
 
-export const calendarData: CalendarData = data2026 as CalendarData;
+export const calendarData: CalendarData = data2027 as CalendarData;
