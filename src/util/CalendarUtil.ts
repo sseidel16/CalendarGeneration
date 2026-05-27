@@ -665,35 +665,32 @@ export class CalendarUtils {
                 textFrame.contents = "";
                 const styleSections: string[] = [];
 
+                const appendSplit = (src: string, styleName: string) => {
+                    const parts = src.split('\n').map(p => p.trim()).filter(p => p);
+                    for (const part of parts) {
+                        if (styleSections.length > 0) textFrame.contents += "\r";
+                        textFrame.contents += part;
+                        styleSections.push(styleName);
+                    }
+                };
+
                 if (dateData.mainText.feast && dateData.mainText.feast[0]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.feast[0];
-                    styleSections.push(`auto:text:${cellType}:eng:feast`);
+                    appendSplit(dateData.mainText.feast[0], `auto:text:${cellType}:eng:feast`);
                 }
                 if (dateData.mainText.feast && dateData.mainText.feast[1]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.feast[1];
-                    styleSections.push(`auto:text:${cellType}:gr:feast`);
+                    appendSplit(dateData.mainText.feast[1], `auto:text:${cellType}:gr:feast`);
                 }
                 if (dateData.mainText.saint && dateData.mainText.saint[0]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.saint[0];
-                    styleSections.push(`auto:text:${cellType}:eng:saint`);
+                    appendSplit(dateData.mainText.saint[0], `auto:text:${cellType}:eng:saint`);
                 }
                 if (dateData.mainText.saint && dateData.mainText.saint[1]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.saint[1];
-                    styleSections.push(`auto:text:${cellType}:gr:saint`);
+                    appendSplit(dateData.mainText.saint[1], `auto:text:${cellType}:gr:saint`);
                 }
                 if (dateData.mainText.note && dateData.mainText.note[0]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.note[0];
-                    styleSections.push(`auto:text:${cellType}:eng:note`);
+                    appendSplit(dateData.mainText.note[0], `auto:text:${cellType}:eng:note`);
                 }
                 if (dateData.mainText.note && dateData.mainText.note[1]) {
-                    if (styleSections.length > 0) textFrame.contents += "\r";
-                    textFrame.contents += dateData.mainText.note[1];
-                    styleSections.push(`auto:text:${cellType}:gr:note`);
+                    appendSplit(dateData.mainText.note[1], `auto:text:${cellType}:gr:note`);
                 }
 
                 textFrame.paragraphs
