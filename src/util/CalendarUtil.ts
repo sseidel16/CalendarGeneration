@@ -1,6 +1,6 @@
 // @ts-ignore: uxp types not available
 import { ColorSpace } from "indesign";
-import { CalendarData, CalendarScriptSettings, DateBox, NoteBox } from "../data/calendar";
+import type { CalendarData, CalendarScriptSettings, DateBox, NoteBox } from "../data/calendar";
 
 export class CalendarUtils {
     private labelMap: Map<string, any> = new Map();
@@ -103,6 +103,7 @@ export class CalendarUtils {
     public async generateCalendar(
         calendarData: CalendarData,
         progressCallback?: (pct: number) => Promise<void>,
+        startMonthIndex: number = 0,
     ) {
         if (!this.doc) {
             console.error("CalendarUtils not initialized with a document");
@@ -125,8 +126,9 @@ export class CalendarUtils {
         const year = calendarData.year;
         const months = calendarData.months;
 
-        for (let month = 0; month < months.length; month++) {
-            var monthData = months[month];
+        for (let i = 0; i < months.length; i++) {
+            const month = startMonthIndex + i;
+            var monthData = months[i];
             var gridData = monthData.grid;
 
             console.log(`Processing month ${month + 1} of year ${year}`);
@@ -184,7 +186,7 @@ export class CalendarUtils {
                             break;
                     }
                     if (progressCallback) {
-                        await progressCallback(Math.min(99, (((month * 5 * 7) + (row * 7) + col) / (12 * 7 * 5)) * 100));
+                        await progressCallback(Math.min(99, (((i * 5 * 7) + (row * 7) + col) / (months.length * 7 * 5)) * 100));
                     }
                 }
             }

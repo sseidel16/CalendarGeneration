@@ -4,11 +4,25 @@ import { app } from "indesign";
 import "./Home.css";
 import { useCallback, useRef, useState } from "react";
 import { CalendarUtils } from "../util/CalendarUtil";
-import { calendarData, CalendarScriptSettings } from "../data/calendar";
+import { generateCalendarYear, GREGORIAN, PROPORTIONAL, CalendarScriptSettings } from "../data/calendar";
+import type { CalendarData } from "../data/calendar";
+
+const YEARS = [
+    "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027",
+    "2028", "2029", "2030"
+];
+const MONTHS = [
+    "All Months", "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+];
 
 export const Home = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [progress, setProgress] = useState(0);
+
+    // Calendar options
+    const [yearIndex, setYearIndex] = useState(7); // default "2027"
+    const [monthIndex, setMonthIndex] = useState(0); // 0 = all months, 1-12 = specific
 
     // Settings state
     const [duplicationPreference, setDuplicationPreference] = useState<"skip" | "replace">("replace");
@@ -55,6 +69,21 @@ export const Home = () => {
         }
     };
 
+    const generateData = (): CalendarData => {
+        const year = parseInt(YEARS[yearIndex]);
+        const fullYear = generateCalendarYear(year, {
+            calendar: GREGORIAN,
+            readingsLayout: { maxLines: 3, maxLineWidth: 33, charWidth: PROPORTIONAL },
+        });
+
+        if (monthIndex === 0) return fullYear;
+
+        return {
+            year: fullYear.year,
+            months: [fullYear.months[monthIndex - 1]],
+        };
+    };
+
     const progressCallback = useCallback(async (pct: number) => {
         setProgress(oldPct => {
             if (pct > oldPct) {
@@ -98,11 +127,13 @@ export const Home = () => {
                 return;
             }
             ensureInitialized(doc);
-            console.log("Generating calendar...");
+            console.log(`Generating calendar for ${YEARS[yearIndex]}${monthIndex > 0 ? ` (${MONTHS[monthIndex]})` : ''}...`);
 
             utilsRef.current.setSettings(getSettingsObject());
 
-            await utilsRef.current.generateCalendar(calendarData, progressCallback);
+            const calendarData = generateData();
+            const startMonthIndex = monthIndex > 0 ? monthIndex - 1 : 0;
+            await utilsRef.current.generateCalendar(calendarData, progressCallback, startMonthIndex);
         } finally {
             setIsRunning(false);
         }
@@ -111,6 +142,32 @@ export const Home = () => {
     return (
         <div className="home-container">
             <div className="settings-panel">
+                <div className="settings-group">
+                    <label>Year</label>
+                    <select
+                        value={yearIndex}
+                        onChange={(e) => setYearIndex(parseInt(e.target.value))}
+                        disabled={isRunning}
+                    >
+                        {YEARS.map((name, i) => (
+                            <option key={i} value={i}>{name}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="settings-group">
+                    <label>Update</label>
+                    <select
+                        value={monthIndex}
+                        onChange={(e) => setMonthIndex(parseInt(e.target.value))}
+                        disabled={isRunning}
+                    >
+                        {MONTHS.map((name, i) => (
+                            <option key={i} value={i}>{name}</option>
+                        ))}
+                    </select>
+                </div>
+
                 <div className="settings-group">
                     <label>Duplication Preference</label>
                     <select
